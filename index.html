@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #upload{
+            display: flex;
+            justify-content: center;
+            background-color: blanchedalmond;
+            border-radius: 20px;
+        }
+        #img-upload{
+            width: 100px;
+        }
+        #file{
+            display: none;
+        }
+        #preview{
+            height: 250px;
+        }
+        #gallery{
+            columns: 4 200px;
+            columns: 3 200px;
+            width: 90%;
+            columns: 3 200px;
+            margin: 30px auto;
+        }
+        .gallery-image{
+            height: 200px;
+            margin: 10px 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="upload">
+        <img src="./cloud-computing.png" id="img-upload" alt="">
+    </div>
+    <input type="file" accept="image/jpeg,image/png,image/jpg,image/svg" id="file" multiple>
+    <br><br>
+    <img src="" id="preview">
+    <div id="gallery"></div>
+<script>
+    let uploader = document.getElementById("upload");
+    let upload = document.getElementById("file");
+    let preview = document.getElementById("preview");
+    let gallery = document.getElementById("gallery");
+    function addToGallery(src){
+        let img = new Image();
+        img.classList = "gallery-image";
+        img.src = src;
+        gallery.appendChild(img);
+    }
+    uploader.addEventListener("click",function(){
+        upload.click();
+    });
+    upload.addEventListener("change",function(){
+        let file = this.files;
+        for(let i=0;i<file.length;i++){
+        const reader = new FileReader();
+        reader.addEventListener("load",function(){
+        // preview.src = reader.result;
+        addToGallery(reader.result);
+        });
+        reader.readAsDataURL(file[i])
+        }
+    });
+</script>
+</body>
+</html>
